@@ -54,6 +54,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %attr(4755,root,bin)	%{_sbindir}/traceroute
-%{_mandir}/man8/traceroute.8.bz2
-
-
+%{_mandir}/man8/traceroute.8*
