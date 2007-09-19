@@ -1,11 +1,12 @@
 Summary: Traces the route taken by packets over a TCP/IP network.
 Name: traceroute
 Version: 1.4a12
-Release: %mkrel 7
+Release: %mkrel 8
 License: BSD
 Group: Monitoring
 URL: http://www.chiark.greenend.org.uk/ucgi/~richard/cvsweb/debfix/packages/traceroute/
 Source: ftp://ftp.ee.lbl.gov/traceroute-%{version}.tar.bz2
+Source1: usr.sbin.traceroute.apparmor
 Patch1: traceroute-1.4a5-secfix.patch
 Patch3: traceroute-1.4a5-autoroute.patch
 Patch4: traceroute-1.4a5-autoroute2.patch
@@ -13,6 +14,7 @@ Patch5: traceroute-1.4a5-unaligned.patch
 Patch18: traceroute-1.4a12-sparcfix.patch
 # (fg) 20001003 This patch fixes traceroute segfault and root exploit
 Prefix: %{_prefix}
+Conflicts: apparmor-profiles < 2.1-1.961.5mdv2008.0
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
@@ -48,10 +50,21 @@ mkdir -p ${RPM_BUILD_ROOT}/{%{_sbindir},%{_mandir}/man8}
 install traceroute ${RPM_BUILD_ROOT}/%{_sbindir}
 cp traceroute.8 ${RPM_BUILD_ROOT}/%{_mandir}/man8
 
+mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
+install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/apparmor.d/usr.sbin.traceroute
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%posttrans
+# if we have apparmor installed, reload if it's being used
+if [ -x /sbin/apparmor_parser ]; then
+        /sbin/service apparmor condreload
+fi
+
+
 %files
 %defattr(-,root,root)
+%config(noreplace) %{_sysconfdir}/apparmor.d/usr.sbin.traceroute
 %attr(4755,root,bin)	%{_sbindir}/traceroute
 %{_mandir}/man8/traceroute.8*
