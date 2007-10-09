@@ -1,4 +1,4 @@
-Summary: Traces the route taken by packets over a TCP/IP network.
+Summary: Traces the route taken by packets over a TCP/IP network
 Name: traceroute
 Version: 1.4a12
 Release: %mkrel 8
