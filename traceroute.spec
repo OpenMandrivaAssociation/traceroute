@@ -15,6 +15,7 @@ Patch18: traceroute-1.4a12-sparcfix.patch
 # (fg) 20001003 This patch fixes traceroute segfault and root exploit
 Prefix: %{_prefix}
 Conflicts: apparmor-profiles < 2.1-1.961.5mdv2008.0
+BuildRoot: %{_tmppath}/%{name}-root
 
 %description
 The traceroute utility displays the route used by IP packets on their
