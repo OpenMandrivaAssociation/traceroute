@@ -1,7 +1,7 @@
 Summary: Traces the route taken by packets over a TCP/IP network
 Name: traceroute
 Version: 1.4a12
-Release: %mkrel 8
+Release: %mkrel 9
 License: BSD
 Group: Monitoring
 URL: http://www.chiark.greenend.org.uk/ucgi/~richard/cvsweb/debfix/packages/traceroute/
