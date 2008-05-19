@@ -1,28 +1,26 @@
-Summary: Traces the route taken by packets over a TCP/IP network
-Name: traceroute
-Version: 1.4a12
-Release: %mkrel 9
-License: BSD
-Group: Monitoring
-URL: http://www.chiark.greenend.org.uk/ucgi/~richard/cvsweb/debfix/packages/traceroute/
-Source: ftp://ftp.ee.lbl.gov/traceroute-%{version}.tar.bz2
-Source1: usr.sbin.traceroute.apparmor
-Patch1: traceroute-1.4a5-secfix.patch
-Patch3: traceroute-1.4a5-autoroute.patch
-Patch4: traceroute-1.4a5-autoroute2.patch
-Patch5: traceroute-1.4a5-unaligned.patch
-Patch18: traceroute-1.4a12-sparcfix.patch
-# (fg) 20001003 This patch fixes traceroute segfault and root exploit
-Prefix: %{_prefix}
-Conflicts: apparmor-profiles < 2.1-1.961.5mdv2008.0
-BuildRoot: %{_tmppath}/%{name}-root
+Summary:	Traces the route taken by packets over an IPv4/IPv6 network
+Name:		traceroute
+Version:	2.0.11
+Release:	%mkrel 1
+Group:		Monitoring
+License:	GPLv2+
+URL:		http://sourceforge.net/projects/traceroute/
+Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.bz2
+Source1:	usr.sbin.traceroute.apparmor
+Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
+New implementation of the traceroute utility for modern Linux systems.
+Backward compatible with the traditional traceroute. Supports both IPv4 
+and IPv6, additional types of trace (including TCP), allows some traces 
+for unprivileged users.
+
 The traceroute utility displays the route used by IP packets on their
-way to a specified network (or Internet) host.  Traceroute displays
+way to a specified network (or Internet) host.Traceroute displays
 the IP number and host name (if possible) of the machines along the
-route taken by the packets.  Traceroute is used as a network debugging
-tool.  If you're having network connectivity problems, traceroute will
+route taken by the packets.Traceroute is used as a network debugging
+tool.If you're having network connectivity problems, traceroute will
 show you where the trouble is coming from along the route.
 
 Install traceroute if you need a tool for diagnosing network connectivity
@@ -30,31 +28,22 @@ problems.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p0
-%ifarch sparc sparc64
-%patch18 -p1 -b .sparc
-%endif
 
 %build
-export RPM_OPT_FLAGS="$RPM_OPT_FLAGS -DHAVE_IFF_LOOPBACK -DUSE_KERNEL_ROUTING_TABLE"
-%configure
-make 
+%make %{?_smp_mflags} CFLAGS="%{optflags}"
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p ${RPM_BUILD_ROOT}/{%{_sbindir},%{_mandir}/man8}
+rm -rf %{buildroot}
+%makeinstall_std prefix=%{_prefix} bindir=%{_sbindir} mandir=%{_mandir}
 
-install traceroute ${RPM_BUILD_ROOT}/%{_sbindir}
-cp traceroute.8 ${RPM_BUILD_ROOT}/%{_mandir}/man8
+install -d %{buildroot}%{_mandir}/man8
+mv -f %{buildroot}%{_mandir}/man.8/* %{buildroot}%{_mandir}/man8
 
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/apparmor.d/usr.sbin.traceroute
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %posttrans
 # if we have apparmor installed, reload if it's being used
@@ -62,9 +51,9 @@ if [ -x /sbin/apparmor_parser ]; then
         /sbin/service apparmor condreload
 fi
 
-
 %files
 %defattr(-,root,root)
+%doc README TODO CREDITS
 %config(noreplace) %{_sysconfdir}/apparmor.d/usr.sbin.traceroute
-%attr(4755,root,bin)	%{_sbindir}/traceroute
+%attr(4755,root,bin) %{_sbindir}/traceroute
 %{_mandir}/man8/traceroute.8*
