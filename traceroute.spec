@@ -36,9 +36,6 @@ problems.
 rm -rf %{buildroot}
 %makeinstall_std prefix=%{_prefix} bindir=%{_sbindir} mandir=%{_mandir}
 
-install -d %{buildroot}%{_mandir}/man8
-mv -f %{buildroot}%{_mandir}/man.8/* %{buildroot}%{_mandir}/man8
-
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/apparmor.d/usr.sbin.traceroute
 
