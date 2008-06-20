@@ -1,10 +1,10 @@
 Summary:	Traces the route taken by packets over an IPv4/IPv6 network
 Name:		traceroute
 Version:	2.0.11
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group:		Monitoring
 License:	GPLv2+
-URL:		http://sourceforge.net/projects/traceroute/
+URL:		http://traceroute.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.bz2
 Source1:	usr.sbin.traceroute.apparmor
 Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
