@@ -1,6 +1,6 @@
 Summary:	Traces the route taken by packets over an IPv4/IPv6 network
 Name:		traceroute
-Version:	2.0.13
+Version:	2.0.14
 Release:	%mkrel 1
 Group:		Monitoring
 License:	GPLv2+
