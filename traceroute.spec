@@ -8,7 +8,7 @@ Release:	1
 Group:		Monitoring
 License:	GPLv2+
 URL:		http://traceroute.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.gz
 Source1:	usr.sbin.traceroute.apparmor
 Patch0:		traceroute-2.0.12-format_not_a_string_literal_and_no_format_arguments.diff
 Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
