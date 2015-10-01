@@ -1,4 +1,2 @@
-removed_sources:
-  traceroute-2.0.19.tar.gz: 44c109cfe4950f1617d0d796b432356b9acf4bd4
 sources:
-  traceroute-2.0.20.tar.gz: 4c792c76ccdbbd3265bb866675f57ab09121efee
+  traceroute-2.0.21.tar.gz: 3acd1f8c275bd8d511e94e3c6f11fc5a280f0abb
