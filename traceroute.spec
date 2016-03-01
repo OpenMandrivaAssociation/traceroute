@@ -3,15 +3,13 @@
 
 Summary:	Traces the route taken by packets over an IPv4/IPv6 network
 Name:		traceroute
-Version:	2.0.21
-Release:	11
+Version:	2.0.22
+Release:	1
 Group:		Monitoring
 License:	GPLv2+
 URL:		http://traceroute.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.gz
-Source1:	usr.sbin.traceroute.apparmor
 Patch0:		06-build.patch
-Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
 
 %description
 New implementation of the traceroute utility for modern Linux systems.
@@ -42,12 +40,6 @@ sed -i 's!-rc!rc!g' default.rules
 
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/apparmor.d/usr.sbin.traceroute
-
-%posttrans
-# if we have apparmor installed, reload if it's being used
-if [ -x /sbin/apparmor_parser ]; then
-        /sbin/service apparmor condreload
-fi
 
 %files
 %doc README TODO CREDITS
