@@ -4,7 +4,7 @@
 Summary:	Traces the route taken by packets over an IPv4/IPv6 network
 Name:		traceroute
 Version:	2.0.22
-Release:	1
+Release:	2
 Group:		Monitoring
 License:	GPLv2+
 URL:		http://traceroute.sourceforge.net/
@@ -33,6 +33,7 @@ problems.
 sed -i 's!-rc!rc!g' default.rules
 
 %build
+%setup_compile_flags
 %make CC=%{__cc} AR=%{__ar}
 
 %install
