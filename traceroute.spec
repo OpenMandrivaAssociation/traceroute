@@ -40,6 +40,5 @@ sed -i 's!-rc!rc!g' default.rules
 
 %files
 %doc README TODO CREDITS
-%config(noreplace) %{_sysconfdir}/apparmor.d/usr.sbin.traceroute
 %attr(4755,root,bin) %{_sbindir}/traceroute
 %{_mandir}/man8/traceroute.8*
