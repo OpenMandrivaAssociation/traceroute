@@ -38,9 +38,6 @@ sed -i 's!-rc!rc!g' default.rules
 %install
 %makeinstall_std prefix=%{_prefix} bindir=%{_sbindir} mandir=%{_mandir}
 
-mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
-install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/apparmor.d/usr.sbin.traceroute
-
 %files
 %doc README TODO CREDITS
 %config(noreplace) %{_sysconfdir}/apparmor.d/usr.sbin.traceroute
