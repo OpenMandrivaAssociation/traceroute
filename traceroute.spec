@@ -1,6 +1,3 @@
-#%define _enable_debug_packages	%{nil}
-#%define debug_package		%{nil}
-
 Summary:	Traces the route taken by packets over an IPv4/IPv6 network
 Name:		traceroute
 Version:	2.1.0
