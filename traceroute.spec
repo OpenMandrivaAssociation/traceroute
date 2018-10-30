@@ -1,7 +1,7 @@
 Summary:	Traces the route taken by packets over an IPv4/IPv6 network
 Name:		traceroute
 Version:	2.1.0
-Release:	2
+Release:	3
 Group:		Monitoring
 License:	GPLv2+
 URL:		http://traceroute.sourceforge.net/
