@@ -26,7 +26,7 @@ problems.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 sed -i 's!-rc!rc!g' default.rules
 
 %build
