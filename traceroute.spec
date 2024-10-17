@@ -4,7 +4,7 @@ Version:	2.1.6
 Release:	1
 Group:		Monitoring
 License:	GPLv2+
-URL:		http://traceroute.sourceforge.net/
+URL:		https://traceroute.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.gz
 Patch0:		06-build.patch
 
