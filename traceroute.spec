@@ -8,6 +8,7 @@ URL:		https://traceroute.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/traceroute/%{name}-%{version}.tar.gz
 Patch0:		06-build.patch
 
+BuildRequires:	make
 %description
 New implementation of the traceroute utility for modern Linux systems.
 Backward compatible with the traditional traceroute. Supports both IPv4 
